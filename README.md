@@ -25,7 +25,7 @@ To update dependencies
     
 ## Execution
 
-The redis-nodes CLI has a single CLI entrypoint [__main__.py](redis_nodes/__main__.py) that takes the `redis cluster nodes` input and hostname to ip mapping as CLI parameters.
+The redis-nodes CLI has a single CLI entrypoint [redis_nodes/__main__.py](redis_nodes/__main__.py) that takes the `redis cluster nodes` input and hostname to ip mapping as CLI parameters.
 
     python redis_nodes/__main__.py -h                                                                               
         usage: redis-nodes [-h] -n NODES -H HOSTS
