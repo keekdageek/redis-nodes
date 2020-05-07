@@ -2,6 +2,13 @@
 
 Simple CLI that parses 'redis cluster nodes' input and a ip address to hostname map.
 
+* [redis\-nodes](#redis-nodes)
+  * [Install](#install)
+  * [Execution](#execution)
+    * [Poetry execution](#poetry-execution)
+    * [Native python 3\.7](#native-python-37)
+  * [Test](#test)
+
 ## Install
 
 Requires python ^3.7
