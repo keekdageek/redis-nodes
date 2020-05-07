@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "redis-nodes"
+version = "0.1.0"
+description = "Parses 'redis-cli cluster nodes' for master slave relationships"
+authors = ["Francisco Marin"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+pandas = "^1.0.3"
+pyyaml = "*"
+# builtin to Python 3.8
+cached_property = "*"
+
+[tool.poetry.dev-dependencies]
+# better interactive debugger
+ipdb = "*"
+pytest = "*"
+# pytest mock utilities
+mock = "*"
+pytest-mock = "*"
+# pytest autotest
+pytest-watch = "*"
+pytest-notifier = "*"
+
+
+[tool.poetry.scripts]
+redis-nodes = "redis_nodes.__main__:main"
