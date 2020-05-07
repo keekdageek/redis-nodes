@@ -19,6 +19,7 @@ class Parser:
         Pandas Dataframe customized for redis nodes output
         :return: pandas dataframe
         """
+        # removes a pandas warning
         pd.options.mode.chained_assignment = None
         dframe = pd.read_csv(self.nodes,
                            sep='\\s+',
@@ -31,6 +32,10 @@ class Parser:
         return dframe
 
     def masters(self):
+        """
+        Uses the parser's datafram to select master rows and then sort by range_start column.
+        :return: Ordered list of master objects
+        """
         master_df = self.df.loc[self.df['flags'] == 'master']
         master_df[['range_start','range_end']] = master_df.range.str.split("-",expand=True)
         master_df[["range_start", "range_end"]] = master_df[["range_start", "range_end"]].apply(pd.to_numeric)
@@ -44,8 +49,11 @@ class Parser:
 
 
     def dump_nodes(self):
+        """
+        Dumps the redis topology of master and slaves in order
+        """
         for master in self.masters():
             print(master.row['range'])
-            print(f"\tmaster: {master.hostname}:{master.row['port']}")
+            print(f"\tmaster: {master.hostname}:{master.row.port}")
             print(f"\tslaves: {', '.join(master.slaves)}")
             print("\n")
