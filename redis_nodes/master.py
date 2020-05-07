@@ -14,10 +14,10 @@ class Master:
     @property
     def hostname(self):
         """
-        Master hostname based on ip_hosts mapped with ipaddress, if ip doesn't exist in map, returns the ip address instead
+        Master hostname
         :return: hostname string
         """
-        return self.topology.ip_hosts.get(self.row.ip, self.row.ip)
+        return self._ip_host(self.row.ip)
 
     @threaded_cached_property
     def slaves(self):
@@ -28,5 +28,13 @@ class Master:
         ret = []
         sframe = self.topology.df.loc[self.topology.df['master'] == self.row.name]
         for idx, row in sframe.iterrows():
-            ret.append(f"{self.topology.ip_hosts.get(row.ip, row.ip)}:{row.port}")
+            ret.append(f"{self._ip_host(row.ip)}:{row.port}")
         return ret
+
+    def _ip_host(self, ip):
+        """
+        Simple hostname lookup based on ip, if not found returns ip
+        :param ip:
+        :return: hostname
+        """
+        return self.topology.ip_hosts.get(ip, ip)
