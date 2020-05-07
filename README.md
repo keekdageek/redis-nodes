@@ -76,7 +76,7 @@ Poetry is able to export a requirements.txt, if you wish to use native python in
 Then to execute w/ requirements.txt
     
     python -m virtualenv ~/.virtualenvs/redis-nodes
-    source /Users/fmarin/.virtualenvs/redis-nodes/bin/activate.fish
+    source /Users/fmarin/.virtualenvs/redis-nodes/bin/activate
     pip install -r requirements.txt
     export PYTHONPATH=$PWD
     python redis_nodes/__main__.py -H tests/fixtures/hosts.csv -n tests/fixtures/nodes.csv
