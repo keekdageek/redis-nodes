@@ -47,4 +47,5 @@ class Parser:
         for master in self.masters():
             print(master.row['range'])
             print(f"\tmaster: {master.hostname}:{master.row['port']}")
-
+            print(f"\tslaves: {', '.join(master.slaves)}")
+            print("\n")

@@ -26,6 +26,10 @@ def test_masters(parser):
     assert masters[1].hostname == 'redis-cluster002'
     assert masters[2].hostname == 'redis-cluster002'
 
+def test_slaves(parser):
+    masters = parser.masters()
+    assert set(masters[0].slaves) == set(['redis-cluster003:7004', 'redis-cluster004:7002'])
+    assert set(masters[4].slaves) == set(['redis-cluster002:7002', 'redis-cluster003:7001', 'redis-cluster001:7003'])
 
 
 
