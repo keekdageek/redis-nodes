@@ -21,14 +21,14 @@ class RedisNodes:
     def main(self):
         cli_args = self._parser.parse_args()
 
-        host_ips = {}
+        ip_hosts = {}
         with open(cli_args.hosts) as fp:
             line = fp.readline()
             while line:
                 host_ip = line.split()
-                host_ips[host_ip[0]] = host_ip[1]
+                ip_hosts[host_ip[1]] = host_ip[0]
                 line = fp.readline()
-        parser = Parser(host_ips, cli_args.nodes)
+        parser = Parser(ip_hosts, cli_args.nodes)
         parser.dump_nodes()
 
 def main():
