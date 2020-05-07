@@ -1,11 +1,10 @@
 import logging
 log = logging.getLogger(__name__)
 from cached_property import threaded_cached_property
-import ipdb
 import pandas as pd
 from .master import Master
 
-class Parser:
+class Topology:
     """
     Parses redis-cli nodes output and dumps ordered master and slave topology
     """

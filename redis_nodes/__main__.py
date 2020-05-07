@@ -2,11 +2,19 @@
 import argparse
 import logging
 logger = logging.getLogger(__name__)
-from .parser import Parser
+from redis_nodes.topology import Topology
 
 class RedisNodes:
+    """
+    Main CLI executable using python argparse.  Requires a nodes and hosts parameter to space deliminated files and dumps the topology.
+    """
     def __init__(self):
-        self._parser = argparse.ArgumentParser(prog='redis-nodes', description="Parses 'redis-cli cluster nodes' input and dumps master slave relationships")
+        """
+        Defines the CLI parameters
+        """
+        self._parser = argparse.ArgumentParser(
+            prog='redis-nodes',
+            description="Parses 'redis-cli cluster nodes' input and dumps master slave relationships")
         self._parser.add_argument(
             '-n', '--nodes',
             required=True,
@@ -18,7 +26,11 @@ class RedisNodes:
             help="Hostname to ip map, assumes space deliminated csv")
 
 
-    def main(self):
+    def exec(self):
+        """
+        Runs the main application by instantiating a Topology and dumping the output
+        :return:
+        """
         cli_args = self._parser.parse_args()
 
         ip_hosts = {}
@@ -28,11 +40,15 @@ class RedisNodes:
                 host_ip = line.split()
                 ip_hosts[host_ip[1]] = host_ip[0]
                 line = fp.readline()
-        parser = Parser(ip_hosts, cli_args.nodes)
-        parser.dump_nodes()
+        top = Topology(ip_hosts, cli_args.nodes)
+        top.dump_nodes()
 
+# executable pip package referenced by poetry.toml
+# > redis-nodes
 def main():
-    return RedisNodes().main()
+    return RedisNodes().exec()
 
+# executed w/ native python
+# > python redis_nodes/__main__.py
 if __name__ == '__main__':
-    RedisNodes().main()
+    RedisNodes().exec()
