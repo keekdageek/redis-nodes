@@ -14,7 +14,7 @@ class RedisNodes:
         """
         self._parser = argparse.ArgumentParser(
             prog='redis-nodes',
-            description="Parses 'redis-cli cluster nodes' input and dumps master slave relationships")
+            description="Parses 'redis-cli cluster nodes' input and dumps master slave relationships. Assumes a clean data feed and doesn't check for missing data")
         self._parser.add_argument(
             '-n', '--nodes',
             required=True,
